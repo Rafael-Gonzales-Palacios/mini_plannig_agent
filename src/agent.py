@@ -1,3 +1,10 @@
+# Importar librerias
+import os
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
+
 def build_prompt(tasks):
     # Necesitamos convertir cada tarea en texto legible
     tasks_text = ""
@@ -18,12 +25,37 @@ def build_prompt(tasks):
         3. [tercera tarea]
 
         Plan Semanal:
-        Lunes: [task]
-        Martes: [task]
-        Miércoles: [task]
+        Lunes: [tasks]
+        Martes: [tasks]
+        Miércoles: [tasks]
+
+        Reglas IMPORTANTES para el plan:
+        - La tarea con prioridad 1 debe programarse el primer día disponible (normalmente el lunes).
+        - La planificación debe ser coherente con el orden de prioridad: primero se programan las tareas más urgentes.
+        - No contradigas el orden de prioridad en el plan semanal.
+
 
         Razón:
-        [Explica brevemente por qué has asignado esa prioridad]
+        [Explica brevemente por qué has asignado esa prioridad y commo se refleja en el plan]
     """
 
     return prompt
+
+def call_lm(prompt):
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
+    # Llamado al modelo
+    response = client.chat.completions.create(
+        model = "llama-3.1-8b-instant",
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
+    )
+
+    #Obtener solo el texto
+    return response.choices[0].message.content
+
+def run_agent(tasks):
+    prompt = build_prompt(tasks)
+    result = call_lm(prompt)
+    return result
