@@ -38,7 +38,7 @@ pip install groq python-dotenv
 ```
 o
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 **3. Configurar varibles de entorno**
