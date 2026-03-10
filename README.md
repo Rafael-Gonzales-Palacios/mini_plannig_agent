@@ -1,124 +1,135 @@
-# 🤖 Mini Agente de Planificación de Tareas 
+# 🤖 Mini Task Plannig Agent 
 
-Un pequeño agente en Python que se encarga de analizar una lista de tareas, luego las prioriza
-y genera un plan semanal utilizando un modelo de lenguaje a través de Groq.
+A small Python-based agent that analyzes a list of tasks, prioritizes them, and generates a weekly plan using a language model powered by Groq.
 
-## 📂 Estructura del proyecto
+## 📂 Project Structure
 
 ```
 prueba_dq/
 ├── src/
-│   ├── tasks.py        # Lista de tareas de entrada en una lista de diccionarios
-│   ├── agent.py        # Lógica del agente y llamadas al LLM
-│   └── main.py         # Punto de entrada del programa
+│   ├── tasks.py        # Input task list stored as a list of dictionaries
+│   ├── agent.py        # Agent logic and LLM interactions
+│   └── main.py         # Program entry point
 ├── output/
-├── weekly_plan.txt     # Resultado generado al ejecutar
+├── weekly_plan.txt     # Generated output after execution
 ├── .gitignore
 └── README.md
 ```
 ---
 
-## ⚙️ Requisitos
+## ⚙️ Requirements
 
-- Una cuenta gratuita en [Groq](https://console.groq.com) para obtener tu API_KEY
+- A free account on [Groq](https://console.groq.com) to obtain your API key.
 
 ---
 
-## 🚀 Instalación
+## 🚀 Installation
 
-**1. Clona el repositorio**
+**1. Clone the repository**
 ```bash
 git clone https://github.com/Rafael-Gonzales-Palacios/mini_plannig_agent.git
 cd mini_plannig_agent
 ```
 
-**2. Instala las dependecias**
+**2. Create a virtual environment**
+
+It is recommended to use a virtual environment to isolate project dependencies.
+
 ```bash
-pip install groq python-dotenv
+python3 -m venv venv
 ```
-o
+
+Activate the environment:
+
+Windows
+```bash
+venv\Scripts\activate
+```
+
+macOS / Linux:
+```bash
+source venv/bin/activate
+```
+
+---
+
+**3. Install dependencies**
+
 ```bash
 pip install -r requirements.txt
 ```
 
-**3. Configurar varibles de entorno**
-Crea un archivo .env y añade tu API_KEY
+---
+
+**4. Configure environment variables**
+
 ```bash
-GROQ_API_KEY = "aquí tu API key real"
+cp .env.example .env
 ```
 
 ---
 
-## ▶️ Ejecución
+## ▶️ Running the project
 ```bash
 python src/main.py
 ```
 
-El programa mostrará el plan en consola y lo guardará automáticamente en `output/weekly_plan.txt`.
+The program will display the plan in the console and automatically save it to `output/weekly_plan.txt`.
 
 ---
 
-## 📋 Ejemplo de salida
+## 📋 Example Output
 ```
-Prioridad:
-1. Leer un libro
-2. Ir al gimnasio
-3. Estudiar Python
+Priority:
+1. Read a book
+2. Go to the gym
+3. Study Python
 
-Plan semanal:
-Lunes: Leer un libro
-Martes: Ir al gimnasio
-Miércoles: Estudiar Python
+Weekly Plan:
+Monday: Read a book
+Tuesday: Go to the gym
+Wednesday: Study Python
 
-Razón:
-La presentación se prioriza porque tiene el deadline más cercano.
+Reasoning:
+The presentation is prioritized because it has the closest deadline.
 ```
 
 ---
 
-## 🧠 Decisiones técnicas
+## 🧠 Technical Decisions
 
-- **Groq + LLaMA 3** como LLM por ser gratuito y suficientemente potente para esta tarea
-- **Separación en módulos** para mantener el código limpio y cada archivo con una sola responsabilidad
-- **Prompt estructurado** para garantizar un formato de salida predecible y consistente
-
----
-
-## ¿Qué hace exactamente?
-
-Le pasas una lista de tareas con su deadline y cuánto tiempo te llevan,
-y el agente se encarga de priorizarlas, montar un plan semanal y explicarte
-por qué ha tomado esas decisiones. El resultado lo guarda en un archivo
-de texto para que lo tengas siempre a mano.
+- **Groq + LLaMA 3** as the LLM due to being free and powerful enough for this task.
+- **Separación en módulos** to keep the code clean and ensure each file has a single responsibility.
+- **Prompt estructurado** to guarantee predictable and consistent output formatting.
 
 ---
 
-## Cómo lo estructuré y por qué
+## What does it actually do?
 
-Decidí separar el código en tres archivos con responsabilidades claras,
-en lugar de meterlo todo en uno. Al principio puede parecer exagerado para
-un proyecto pequeño, pero para mi es mejor ya que si quiero modificar o buscar algo
-voy directamente a un archivo especifico sin romper el resto.
-
----
-
-La parte que más tiempo me llevó fue el prompt. Aprendí que si no le dices
-al modelo exactamente qué formato quieres en la respuesta, cada ejecución
-te devuelve algo diferente y eso complica guardar el resultado limpiamente.
-Una vez que fijé el formato en el propio prompt, todo funcionó de forma
-consistente y correcta.
-
-Para el LLM elegí Groq porque es gratuito y el modelo LLaMA 3 que ofrecen
-es más que suficiente para este tipo de tarea.
+You provide a list of tasks with deadlines and estimated durations.
+The agent prioritizes them, builds a weekly plan, and explains the reasoning behind its decisions.
+The final result is saved to a text file so you can refer to it anytime
 
 ---
 
-## 📈 Mejoras con más tiempo
+## How I structured it and why
 
-- Permitir introducir tareas desde la terminal de forma interactiva
-- Añadir tests automáticos para la función `build_prompt`
-- Validar que las tareas tienen todos los campos necesarios antes de enviarlas al LLM
-- Permitir elegir el modelo de LLM desde configuración
-- Exportar el plan también en formato PDF
+I chose to split the code into three files with clear responsibilities instead of putting everything in one place.
+Even for a small project, this makes maintenance easier—if I need to modify something, I know exactly where to look without risking breaking unrelated parts.
+
+---
+
+The most time-consuming part was designing the prompt. I learned that if you don’t explicitly define the output format, the model produces different structures each time, which makes saving the result messy. Once I enforced the format inside the prompt, everything became consistent and reliable.
+I selected Groq because it’s free and the LLaMA 3 model they provide is more than enough for this type of task.
+
+---
+
+## 📈 Potential Improvements
+
+- Allow interactive task input from the terminal.
+- Add automated tests for the `build_prompt` function.
+- Validate task fields before sending them to the LLM.
+- Allow selecting the LLM model via configuration.
+- Export the weekly plan in PDF format.
 
 ---
