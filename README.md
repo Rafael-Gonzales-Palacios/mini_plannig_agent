@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # 🤖 Mini Agente de Planificación de Tareas 
 
 Un pequeño agente en Python que se encarga de analizar una lista de tareas, luego las prioriza
@@ -124,4 +122,3 @@ es más que suficiente para este tipo de tarea.
 - Exportar el plan también en formato PDF
 
 ---
->>>>>>> eb045020c5b2a7d9dc61ba89734040df1606349a
