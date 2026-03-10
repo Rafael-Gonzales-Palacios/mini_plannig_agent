@@ -9,18 +9,18 @@ def save_result(result):
         file.write(result)
 
     print("\n" + "═" * 60)
-    print("Plan guardado correctamente..".center(60))
+    print("Plan saved successfully..".center(60))
     print("═" * 60 + "\n")
 
 def main():
-    print("\n🤖 Analizando tareas...")
+    print("\nAnalyzing tasks...")
     
     # Llamar al agente
     result = run_agent(tasks)
 
     # Mostrar los resultados
     print("\n" + "═" * 60)
-    print("📋RESULTADO DEL AGENTE".center(60))
+    print("Agent result".center(60))
     print("═" * 60 + "\n")
 
     print(result)
