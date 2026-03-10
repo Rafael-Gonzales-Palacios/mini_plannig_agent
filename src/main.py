@@ -8,16 +8,21 @@ def save_result(result):
     with open("output/weekly_plan.txt", "w", encoding="UTF-8") as file:
         file.write(result)
 
-    print("Plan guardado correctamente..")
+    print("\n" + "═" * 60)
+    print("Plan guardado correctamente..".center(60))
+    print("═" * 60 + "\n")
 
 def main():
-    print("🤖 Analizando tareas...")
+    print("\n🤖 Analizando tareas...")
     
     # Llamar al agente
     result = run_agent(tasks)
 
     # Mostrar los resultados
-    print("\n📋RESULTADO:\n")
+    print("\n" + "═" * 60)
+    print("📋RESULTADO DEL AGENTE".center(60))
+    print("═" * 60 + "\n")
+
     print(result)
 
     # Guardar en archivo
