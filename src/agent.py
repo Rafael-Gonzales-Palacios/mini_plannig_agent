@@ -25,9 +25,13 @@ def build_prompt(tasks):
         3. [tercera tarea]
 
         Plan Semanal:
-        Lunes: [tasks]
-        Martes: [tasks]
-        Miércoles: [tasks]
+        Lunes: [task]
+        Martes: [task]
+        Miércoles: [task]
+        Jueves: [task]
+        Viernes: [task]
+        Sábado: [task]
+        Domingo: [task]
 
         Reglas IMPORTANTES para el plan:
         - La tarea con prioridad 1 debe programarse el primer día disponible (normalmente el lunes).
@@ -36,7 +40,7 @@ def build_prompt(tasks):
 
 
         Razón:
-        [Explica brevemente por qué has asignado esa prioridad y commo se refleja en el plan]
+        [Explica brevemente por qué has asignado esa prioridad y como se refleja en el plan]
     """
 
     return prompt
